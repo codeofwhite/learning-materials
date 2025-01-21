@@ -1,0 +1,780 @@
+\documentclass[10pt,a4paper]{ctexart} % 使用 ctexart 支持中文
+\usepackage[margin=0.5cm]{geometry} % 页边距改为 0.5cm 或更小
+\usepackage{multicol} % 多栏布局
+\usepackage{amsmath,amssymb} % 数学公式支持
+\usepackage{hyperref} % 超链接支持
+\usepackage{xcolor} % 颜色支持
+\usepackage{graphicx} % 图片支持
+\usepackage[compact]{titlesec}
+\titlespacing*{\section}{0pt}{0pt}{0pt} % 标题前后间距设为 0
+\setlength{\columnsep}{0.45cm} % 原为 1cm，改为 0.5cm 或更小
+\setlength{\parskip}{0pt} % 取消段落间距
+\setlength{\parindent}{0pt} % 取消段首缩进
+
+% 调整公式上下间距
+\setlength{\abovedisplayskip}{1pt} % 缩小公式上方间距
+\setlength{\belowdisplayskip}{1pt} % 缩小公式下方间距
+\setlength{\abovedisplayshortskip}{0pt} % 缩小短公式上方间距
+\setlength{\belowdisplayshortskip}{0pt} % 缩小短公式下方间距
+
+\pagestyle{empty} % 去除页眉页脚
+
+\begin{document}
+	\tiny % 极小字体
+	\begin{multicols*}{3} % 设置为三栏布局
+		
+		% 标题
+		% 用这个小标题
+		\section*{\centering \normalsize Cheatsheet}
+		
+		% 一、矩阵
+		$|A^{\prime}|=|A|$, $A^{-1}=\frac{A}{|A|}$,$tr(AB)=tr(BA)$,$\mathrm{tr}(A^{\prime}A)=\mathrm{tr}(AA^{\prime})=\sum_{i=1}^{p}\sum_{j=1}^{q}a_{ij}^{2}$
+		
+		
+		% 二、随机
+		\section*{\centering \normalsize 2. 随机}
+		
+		$f\left(x_{1}\mid x_{2}\right)=\frac{f\left(x_{1},x_{2}\right)}{f_{2}\left(x_{2}\right)}$
+		
+		\textbf{协方差矩阵：}
+		
+		$\mathrm{Cov}(x,y)=E\left[x-E\left(x\right)\right]\left[y-E\left(y\right)\right]$
+		
+		$Cov(x,y)=E\left[x-E\left(x\right)\right]\left[y-E\left(y\right)\right]^{\prime}$
+		
+		\textbf{协方差性质：}
+		
+		$Cov(y,x)=\left[Cov(x,y)\right]^{\prime}$
+		
+		$V(Ax+b)=AV(x)A^{\prime}$
+		
+		$V\left(\sum_{i=1}^nk_ix_i\right)=\sum_{i=1}^nk_i^2V\left(x_i\right)$
+		
+		$Cov\left(Ax,By\right)=ACov\left(x,y\right)B^{\prime}$
+		
+		\textbf{协方差矩阵相关矩阵转换：}
+		
+		$R=D^{-1}\Sigma D^{-1}, D = diag(\sqrt{\Sigma_{11}},\sqrt{\Sigma_{22}},\dots,\sqrt{\Sigma_{nn}})$
+		
+		\textbf{相关系数：}
+		
+		$\rho=\rho(x,y)=\frac{\mathrm{Cov}(x,y)}{\begin{bmatrix}V(x)\bullet V(y)\end{bmatrix}^{1/2}}$
+		
+		\textbf{马氏距离：}
+		$d^{2}\left(x,y\right)=\left(x-y\right)^{\prime}\Sigma^{-1}\left(x-y\right)$
+		
+		% 三、正态
+		\section*{\centering \normalsize 3. 正态}
+		对于二元正态分布，两个分量的不相关性和独立性是等价的
+		
+		$f\left(x\right)=\left(2\pi\right)^{-p/2}\left|\boldsymbol{\Sigma}\right|^{-1/2}\exp\left[-\frac{1}{2}\left(x-\boldsymbol{\mu}\right)^{\prime}\boldsymbol{\Sigma}^{-1}\left(x-\boldsymbol{\mu}\right)\right]$
+		
+		\textbf{条件分布公式：}
+		$\begin{aligned}&\boldsymbol{\mu}_{1}._{2}=\boldsymbol{\mu}_{1}+\boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}(\boldsymbol{x}_{2}-\boldsymbol{\mu}_{2})\\
+			&\boldsymbol{\Sigma}_{11}._{2}=\boldsymbol{\Sigma}_{11}-\boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}\boldsymbol{\Sigma}_{21}\end{aligned}$
+		
+		即$x_1|x_2 ~ N(\mu_1 + \Sigma_{12}\Sigma_{22}^{-1}(x_2-\mu_2),\Sigma_{11}-\Sigma_{12}\Sigma{22}^{-1}\Sigma_{21})$
+		
+		\textbf{复相关系数：}
+		$$\begin{aligned}\rho_{y}._{x}&=\max_{l\neq0}\rho(y,l^{\prime}x)=\rho(y,\sigma_{xy}^{\prime}\Sigma_{xx}^{-1}x)\\&=\sqrt{\frac{\sigma_{xy}^{\prime}\boldsymbol{\Sigma}_{xx}^{-1}\boldsymbol{\sigma}_{xy}}{\sigma_{yy}}}=\sqrt{\boldsymbol{\rho}_{xy}^{\prime}\boldsymbol{R}_{xx}^{-1}\boldsymbol{\rho}_{xy}}\end{aligned}$$
+		
+		\textbf{样本：}
+		$$r_{y}\cdot x=\sqrt{\frac{s_{xy}^{\prime}S_{xx}^{-1}s_{xy}}{s_{yy}}}=\sqrt{r_{xy}^{\prime}\hat{R}_{xx}^{-1}r_{xy}}$$
+		
+		线性预测函数$\tilde{y}=\mu_y+\sigma_{xy}^{\prime}\Sigma_{xx}^{-1}\left(x-\mu_x\right)$
+		
+		$r(y,\hat{y})=r_{y\cdot x}$，$\tilde{y}$的精度与$\sigma_{yy}$和$\rho_{y \cdot x}$有关，$\sigma_{yy}\left(1-\rho_{y\bullet x}^2\right)$
+		
+		复判定系数$R^2=r_{y\cdot x}^2$，可以分解为最优线性预测（被x影响），预测误差（不受x影响）
+		
+		\textbf{偏相关系数：}
+		
+		矩阵：$\boldsymbol{\Sigma}_{11}._{2}=\boldsymbol{\Sigma}_{11}-\boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}\boldsymbol{\Sigma}_{21}=(\sigma_{ij}._{k+1,\cdots,p})$
+		
+		$$\rho_{ij}\cdot_{k+1},\cdots,p=\frac{\sigma_{ij}\cdot_{k+1,\cdots,p}}{\sqrt{\sigma_{ii}\cdot_{k+1,\cdots,p}\sigma_{jj}\cdot_{k+1,\cdots,p}}},\quad1\leqslant i,j\leqslant k$$
+		
+		这个$ii,jj$就是对角线元素，ij就是非对角的，但首先需要求出偏协方差矩阵。偏相关矩阵通过求条件分布求出来的N(?,?)的$\Sigma$决定
+		
+		$$\rho_{ij\cdot k+1,\cdots,p}=\frac{\rho_{ij\cdot k+2,\cdots,p}-\rho_{i,k+1\cdot k+2,\cdots,p}\rho_{j,k+1\cdot k+2,\cdots,p}}{\sqrt{1-\rho_{i,k+1\cdot k+2,\cdots,p}^{2}}\sqrt{1-\rho^2_{j,k+1\cdot k+2,\cdots,p}}}$$
+		
+		例子（一阶的）
+		
+		$\rho_{12}._{3}=\frac{\rho_{12}-\rho_{13}\rho_{23}}{\sqrt{1-\rho_{13}^{2}}\sqrt{1-\rho_{23}^{2}}}$，
+		$\rho_{13}._{2}=\frac{\rho_{13}-\rho_{12}\rho_{23}}{\sqrt{1-\rho_{12}^{2}}\sqrt{1-\rho_{23}^{2}}}$
+		
+		
+		
+		% 四、推断
+		\section*{\centering \normalsize 4. 推断}
+		\textbf{单个总体：}$H_0:\mu=\mu_0, H_1:\mu \neq \mu_0$。n个样本，p个如$(x_1,x_2)$变量
+		
+		\textbf{协方差已知}
+		$$T_0^2=(\overline{x}-\boldsymbol{\mu}_0)^{\prime}\left(\frac{1}{n}\boldsymbol{\Sigma}\right)^{-1}(\overline{x}-\boldsymbol{\mu}_0)=n(\overline{x}-\boldsymbol{\mu}_0)^{\prime}\boldsymbol{\Sigma}^{-1}(\overline{x}-\boldsymbol{\mu}_0)$$
+		$$\text{若 }T_0^2\geqslant\chi_\alpha^2(p)\text{,则拒绝 }H_0$$
+		
+		\textbf{协方差未知}（T还是一样的）
+		$$\frac{n-p}{p\left(n-1\right)}T^{2}\sim F\left(p,n-p\right)$$
+		$$\text{若}\frac{n-p}{p(n-1)}T^2\geqslant F_a(p,n-p),\text{则拒绝 }H_0$$
+		等价于：
+		$$\text{若}T^{2}\geqslant T_{a}^{2}\left(p,n-1\right)\text{,则拒绝}H_{0}$$
+		
+		转换公式：
+		$$T_{\alpha}^{2}\left(p,n-1\right)=\frac{p\left(n-1\right)}{n-p}F_{\alpha}\left(p,n-p\right)$$
+		
+		\textbf{置信区域}
+		
+		$\{\mu:n(\overline{x}-\mu)^{\prime}S^{-1}(\overline{x}-\mu)\leqslant T_{a}^{2}(p,n-1)\}$
+		
+		\textbf{联合置信区间：}条件不同，改的是$T_{\alpha}$括号里面的东西。这个放的不是矩阵是数字，一个一个代入
+		
+		$a^{\prime}\overline{x}-T_{a}\left(p,n-1\right)\sqrt{a^{\prime}Sa}/\sqrt{n}\leqslant a^{\prime}\mu\leqslant a^{\prime}\overline{x}+T_{a}\left(p,n-1\right)\sqrt{a^{\prime}Sa}/\sqrt{n}$
+		
+		其中：$a \in R^p$
+		
+		\textbf{邦弗伦尼置信区间：}条件不同，改的是$t_{\alpha / 2k}$括号里面的东西
+		
+		$a_i^{\prime}\overline{x}-t_{a/2k}(n-1)\sqrt{a_i^{\prime}Sa_i}/\sqrt{n}\leqslant a_i^{\prime}\mu\leqslant a_i^{\prime}\overline{x}+t_{a/2k}(n-1)\sqrt{a_i^{\prime}Sa_i}/\sqrt{n}$
+		
+		\textbf{两个总体：}$H_0:\mu_1=\mu_2, H_1:\mu_1 \neq \mu_2$。p个变量
+		
+		\textbf{样本独立}
+		$$S_p=\frac{(n_1-1)S_1+(n_2-1)S_2}{n_1+n_2-2}$$
+		
+		$$T^{2}=\left(\frac{1}{n_{1}}+\frac{1}{n_{2}}\right)^{-1}\left(\overline{x}-\overline{y}\right)^{\prime}S_{p}^{-1}\left(\overline{x}-\overline{y}\right)$$
+		
+		$$\frac{n_{1}+n_{2}-p-1}{p\left(n_{1}+n_{2}-2\right)} T^{2} \sim F\left(p, n_{1}+n_{2}-p-1\right)$$
+		
+		拒绝规则：
+		
+		$\text { 若 } T^{2} \geqslant T_{s}^{2}\left(p, n_{1}+n_{2}-2\right) \text {, 则拒绝 } H_{0}$
+		
+		置信区间：$a^{\prime}(\bar{x}-\bar{y})\pm T_a(p,n_1+n_2-2)\sqrt{\frac{n_1+n_2}{n_1n_2}}\sqrt{\boldsymbol{a}^{\prime}\boldsymbol{S}_p\boldsymbol{a}}$
+		
+		谤佛论你：$a_i^{\prime}(\overline{x}-\overline{y})\pm t_{a/2k}(n_1+n_2-2)\sqrt{\frac{n_1+n_2}{n_1n_2}}\sqrt{\boldsymbol{a}_i^{\prime}\boldsymbol{S}_p\boldsymbol{a}_i}$
+		
+		
+		\textbf{成对实验}
+		
+		$H_0:\mu_1=\mu_2, H_1:\mu_1 \neq \mu_2$
+		
+		$H_0:\delta=0,H_1:\delta \neq 0$
+		
+		其中$\delta = \mu_1 - \mu_2$
+		
+		$$T^2=n\overline{\boldsymbol{d}}^{\prime}\boldsymbol{S}_d^{-1}\overline{\boldsymbol{d}}$$
+		
+		其中：$\overline{d}=\overline{x}-\overline{y},\quad S_d=\frac1{n-1}\sum_{i=1}^n\left(d_i-\overline{d}\right)\left(d_i-\overline{d}\right)^{\prime}$
+		
+		$$\text{若} T^2\geqslant T_a^2(p,n-1)\text{,则拒绝} H_0$$
+		
+		\textbf{4.5 多元方差分析：} p元,k个分布,n个样本
+		
+		$H_0:\mu_1=\mu_2=\dots=\mu_k, H_1:\mu_i \neq \mu_j,\text{至少存在一对}i \neq j$
+		$$E=SSE=\sum_{i=1}^{k}\sum_{j=1}^{n_{i}}\left(x_{ij}-\overline{x}_{i}\right)\left(x_{ij}-\overline{x}_{i}\right)^{\prime}$$
+		
+		$$H=SSTR=\sum_{i=1}^{k}n_{i}\left(\overline{x}_{i}-\overline{x}\right)\left(\overline{x}_{i}-\overline{x}\right)^{\prime}$$
+		
+		$\text{则}T=E+H$
+		
+		$\Lambda=\frac{|E|}{|E+H|}$
+		
+		$$\text{若 }\Lambda\leqslant\Lambda_{1-a}(p,k-1,n-k),\text{则拒绝 }H_0$$
+		
+		威尔克斯 A 分布的基本性质（此p,n,m非比p,n,m）：
+		
+		$\Lambda(p,n,m)=\Lambda(n,p,m+n-p)$
+		
+		$\frac{\left(m-1\right)\left(1-\sqrt{\Lambda}\right)}{n\sqrt{\Lambda}}\sim F\left(2n,2\left(m-1\right)\right)$
+		
+		$\frac{\left(m-p+1\right)\left(1-\sqrt{\Lambda}\right)}{p\sqrt{\Lambda}}\sim F\left(2p,2\left(m-p+1\right)\right)$ 例题用的这个
+		
+		$\frac{m(1-\Lambda)}{n\Lambda}\sim F(n,m)$
+		
+		$\frac{(m-p+1)(1-\Lambda)}{p\Lambda}\sim F(p,m-p+1)$
+		
+		
+		\textbf{4.6 协方差相等性检验：}
+		
+		$H_0:\Sigma_1=\Sigma_2=\dots=\Sigma_k,H_1:\Sigma_i \neq \Sigma_j, \text{至少存在一对}i \neq j$
+		
+		$$S_i=\frac{1}{n_i-1}\sum_{j=1}^{n_i}\left(x_{ij}-\overline{x}_i\right)\left(x_{ij}-\overline{x}_i\right)^{\prime}$$
+		
+		$$S_p=\frac{1}{n-k}\sum_{i=1}^k\left(n_i-1\right)S_i=\frac{1}{n-k}E$$
+		
+		$$M=-2\mathrm{ln}\lambda=(n-k)\ln|S_{p}|-\sum_{i=1}^{k}(n_{i}-1)\ln|S_{i}|$$
+		
+		$$u=(1-c)M$$
+		
+		$$c=\left(\sum_{i=1}^{k}\frac{1}{n_{i}-1}-\frac{1}{n-k}\right)\frac{2p^{2}+3p-1}{6(p+1)(k-1)}$$
+		
+		$n_i$全部相等时：
+		$$c=\frac{\left(2p^{2}+3p-1\right)\left(k+1\right)}{6\left(p+1\right)\left(n-k\right)}$$
+		
+		拒绝规则：
+		$$\text{若}u\geqslant\chi_{a}^{2}\left[\frac{1}{2}\left(k-1\right)p\left(p+1\right)\right]\text{,则拒绝}H_{0}$$
+		
+		\textbf{4.7 总体相关系数推断}
+		简单相关性：
+		
+		$H_0:\rho_{ij}=0,H_1:\rho_{ij} \neq 0$
+		
+		$$\frac{\sqrt{n-2}r_{ij}}{\sqrt{1-r_{ij}^2}}$$
+		
+		拒绝规则：
+		
+		$\text{若}\frac{\sqrt{n-2}\left|r_{ij}\right|}{\sqrt{1-r_{ij}^{2}}}\geqslant t_{a/2}\left(n-2\right)\text{,则拒绝}H_{0}$
+		
+		% 五、判别
+		\section*{\centering \normalsize 5. 判别}
+		\textbf{两组}
+		
+		\textbf{协方差矩阵相等}
+		
+		$W(x)=a^{\prime}(x-\bar{\mu})$
+		
+		$\bar{\mu}=\frac{1}{2}(\mu_1+\mu_2)$
+		
+		$a=\Sigma^{-1}(\mu_1-\mu_2)$
+		
+		$\Sigma^{-1}$这个的估计可以用$S_p$
+		
+		判别规则：
+		\begin{equation}
+			\begin{cases}
+				x{\in}\pi_1,&\text{若}W(x){\geqslant}0\\
+				x{\in}\pi_2,&\text{若}W(x){<}0
+			\end{cases}
+		\end{equation}
+		
+		误判概率：
+		
+		$\Delta^2=(\boldsymbol{\mu}_1-\boldsymbol{\mu}_2)^{\prime}\boldsymbol{\Sigma}^{-1}(\boldsymbol{\mu}_1-\boldsymbol{\mu}_2)$
+		
+		$P\left(2|1\right)=P\left(1|2\right)=\Phi\left(-\frac{\Delta}{2}\right)$
+		
+		\textbf{估计方法}
+		
+		1. 回代法：误判的除以全部的。
+		
+		$\hat{P}(2\mid1)=\frac{n(2\mid1)}{n_1},\quad\hat{P}(1\mid2)=\frac{n(1\mid2)}{n_2}$
+		
+		2. 划分样本：训练集和测试集。训练集构造判别函数，测试集用来评估。
+		
+		3. 交叉验证法：   比如说两个组
+		①我组1抽取1个样本，然后组1剩下n-1，和组2的n个搞个判别函数
+		②对抽取的那个样本判别
+		③组2也是这么做
+		④一直循环往复
+		⑤还是回代法算出最后的误判概率
+		
+		\textbf{协方差矩阵不相等}
+		$$\begin{aligned}W\left(x\right)&=d^{2}\left(x,\pi_{1}\right)-d^{2}\left(x,\pi_{2}\right)\\&=\left(x-\mu_{1}\right)^{\prime}\Sigma_{1}^{-1}\left(x-\mu_{1}\right)-\left(x-\mu_{2}\right)^{\prime}\Sigma_{2}^{-1}\left(x-\mu_{2}\right)\end{aligned}$$
+		
+		判别规则：
+		\begin{equation}
+			\begin{cases}
+				x{\in}\pi_1,&\text{若}W(x){\leqslant}0\\
+				x{\in}\pi_2,&\text{若}W(x){>}0
+			\end{cases}
+		\end{equation}
+		
+		\textbf{多组距离判别}
+		
+		$S_p = \frac{1}{n-k}\sum_{i=1}^k(n_i-1)S_i$
+		
+		$S_i=\frac{1}{n_i-1}\sum_{j=1}^{n_i}\left(x_{ij}-\overline{x}_i\right)\left(x_{ij}-\overline{x}_i\right)^{\prime}$
+		
+		基于线性判别：
+		$$x{\in}\pi_{l},\quad\text{若}\hat{\boldsymbol{I}}_{l}x+\hat{\boldsymbol{c}}_{l}=\max_{1\leqslant i\leqslant k}(\hat{\boldsymbol{I}}_{i}^{'}x+\hat{\boldsymbol{c}}_{i})$$
+		
+		$$\text{其中}\hat{\boldsymbol{I}}_i=\boldsymbol{S}_p^{-1}\overline{\boldsymbol{x}}_i,\hat{c}_i=-\frac{1}{2}\overline{\boldsymbol{x}}_i^{\prime}\boldsymbol{S}_p^{-1}\overline{\boldsymbol{x}}_i,\quad i=1,2,\cdots,k$$
+		
+		或是基于二次判别：
+		
+		$x{\in}\pi_{l},\quad\text{若 }\hat{d}^{2}\left(\boldsymbol{x},\pi_{l}\right)=\min_{1\leqslant i\leqslant k}\hat{d}^{2}\left(\boldsymbol{x},\pi_{i}\right)$
+		
+		$\text{其中}\hat{d}^{2}\left(x,\pi_{i}\right)=\left(x-\overline{x}_{i}\right)^{\prime}S_{i}^{-1}\left(x-\overline{x}_{i}\right),\quad i=1,2,\cdots,k$
+		
+		\textbf{5.3 贝叶斯}
+		\textbf{最大后验概率}
+		$$P\left(\pi_{i}\mid x\right)=\frac{p_{i}f_{i}\left(x\right)}{\sum_{j=1}^{k}p_{j}f_{j}\left(x\right)},\quad i=1,2,\cdots,k$$
+		
+		判别规则：
+		
+		$x{\in}\pi_{l},\quad\text{若}P\left(\pi_{l}|x\right)=\max_{1\leqslant i\leqslant k}P\left(\pi_{i}|x\right)$
+		
+		\textbf{正态时}
+		
+		$\begin{aligned}d^{2}\left(x,\pi_{i}\right)&=(x-\mu_i)^{\prime}\boldsymbol{\Sigma}^{-1}(x-\mu_i)=x^{\prime}\boldsymbol{\Sigma}^{-1}x-2\boldsymbol{\mu}_i^{\prime}\boldsymbol{\Sigma}^{-1}\boldsymbol{x}+\boldsymbol{\mu}_i^{\prime}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}_i\\&=x^{\prime}\boldsymbol{\Sigma}^{-1}x-2(\boldsymbol{I}_i^{\prime}\boldsymbol{x}+c_i)\end{aligned}$
+		
+		$$P\left(\pi_{i}\mid x\right)=\frac{\exp\left[-\frac{1}{2}D^{2}\left(x,\pi_{i}\right)\right]}{\sum_{j=1}^{k}\exp\left[-\frac{1}{2}D^{2}\left(x,\pi_{j}\right)\right]},\quad i=1,2,\cdots,k$$
+		
+		其中：$D^{2}\left(x,\pi_{i}\right)=d^{2}\left(x,\pi_{i}\right)+g_{i}+h_{i}$
+		
+		$g_i=\begin{cases}\ln|\boldsymbol{\Sigma}_i|,&\text{若 }\boldsymbol{\Sigma}_1,\boldsymbol{\Sigma}_2,\cdots,\boldsymbol{\Sigma}_k\text{ 不全相等}\\0,&\text{若 }\boldsymbol{\Sigma}_1=\boldsymbol{\Sigma}_2=\cdots=\boldsymbol{\Sigma}_k=\boldsymbol{\Sigma}\end{cases}$
+		
+		$h_i=
+		\begin{cases}
+			-2\mathrm{ln}p_i,&\text{若 }p_1,p_2,\cdots,p_k\text{ 不全相等}\\
+			0,&\text{若 }p_1=p_2=\cdots=p_k=\frac{1}{k}
+		\end{cases}$
+		
+		$i=1,2,\cdots,k$
+		
+		判别规则：
+		$$x\in\pi_{l},\quad\text{若 }D^2(x,\pi_l)=\min_{1\leqslant i\leqslant k}D^2(x,\pi_i)$$
+		
+		\textbf{协方差矩阵相等}
+		$$\begin{aligned}P(\pi_{i}\mid x)&=\frac{\exp(\boldsymbol{I}_i^{\prime}\boldsymbol{x}+c_i+\ln p_i)}{\sum_{j=1}^k\exp(\boldsymbol{I}_j^{\prime}\boldsymbol{x}+c_j+\ln p_j)},\quad i=1,2,\cdots,k\end{aligned}$$
+		
+		判别规则（最大）：
+		$$x\in\pi_{l},\quad\text{若 }I_{l}^{\prime}x+c_{l}+\ln p_{l}=\max_{1\leqslant i\leqslant k}\left(I_{i}^{\prime}x+c_{i}+\ln p_{i}\right)$$
+		
+		\textbf{二、最小期望误判代价法}
+		
+		\textbf{ECM最小规则}
+		
+		$\begin{cases}x{\in}\pi_{1},&\text{若}\frac{f_{1}\left(x\right)}{f_{2}\left(x\right)}{\geqslant}\frac{c\left(1\mid2\right)p_{2}}{c\left(2\mid1\right)p_{1}}\\x{\in}\pi_{2},&\text{若}\frac{f_{1}\left(x\right)}{f_{2}\left(x\right)}{<}\frac{c\left(1\mid2\right)p_{2}}{c\left(2\mid1\right)p_{1}}\end{cases}$
+		
+		\textbf{2. 两个正态组时}
+		
+		\textbf{协方差矩阵相等：}这里$a$和$\bar{\mu}$公式和前面一样
+		
+		$\begin{cases}x{\in}\pi_1,&\text{若}a^{\prime}(x{-}\overline{\boldsymbol{\mu}}){\geqslant}\ln\left[\frac{c(1|2)p_2}{c(2|1)p_1}\right]\\x{\in}\pi_2,&\text{若}a^{\prime}(x{-}\overline{\boldsymbol{\mu}}){<}\ln\left[\frac{c(1|2)p_2}{c(2|1)p_1}\right]\end{cases}$
+		
+		\textbf{协方差矩阵不相等}
+		
+		$\begin{cases}x\in\pi_1,&\text{若 }d^2(x,\pi_1)-d^2(x,\pi_2)\leqslant2\ln\left[\frac{c(2\mid1)p_1\mid\boldsymbol{\Sigma}_2\mid^{1/2}}{c(1\mid2)p_2\mid\boldsymbol{\Sigma}_1\mid^{1/2}}\right]\\x\in\pi_2,&\text{若 }d^2(x,\pi_1)-d^2(x,\pi_2)>2\ln\left[\frac{c(2\mid1)p_1\mid\boldsymbol{\Sigma}_2\mid^{1/2}}{c(1\mid2)p_2\mid\boldsymbol{\Sigma}_1\mid^{1/2}}\right]\end{cases}$
+		
+		其中$d^2(x,\pi_i)=(x-\mu_i)^{'}\Sigma_i^{-1}(x-\mu_i)$
+		
+		\textbf{3. 多组}
+		
+		$x\in\pi_l,$
+		$$\quad\text{若}\sum_{\binom{j=1}{j\neq l}}^kp_jc\left(l\mid j\right)f_j\left(x\right)=\min_{1\leqslant i\leqslant k}\sum_{\binom{j=1}{j\neq i}}^kp_jc\left(i\mid j\right)f_j\left(x\right)$$
+		
+		\textbf{5.4 费希尔，机器学习}
+		
+		求各个类别的均值和总均值（总均值公式）：
+		$\overline{x}=\frac{1}{n}\sum_{i=1}^{k}n_{i}\overline{x}_{i}$
+		
+		1. 组间平方和：
+		$H=\sum_{i=1}^{k}n_{i}\left(\overline{x}_{i}-\overline{x}\right)\left(\overline{x}_{i}-\overline{x}\right)^{\prime}$
+		
+		2. 组内平方和：
+		$$E=\sum_{i=1}^{k}\left(n_{i}-1\right)S_{i}=\sum_{i=1}^{k}\sum_{j=1}^{n_{i}}\left(x_{ij}-\overline{x}_{i}\right)\left(x_{ij}-\overline{x}_{i}\right)^{\prime}$$
+		
+		然后对$E^{-1}H$做特征值分解
+		
+		然后根据下面这个公式选择特征值的个数：
+		
+		$s=min(k-1,p)$
+		
+		最后构建费希尔判别函数：
+		
+		$y_1 = t_i^{'}(x-\bar{x})$
+		
+		\textbf{5.5 逐步判别}
+		
+		\textbf{一、附加信息检验}
+		
+		$x^{\prime}=(x^{\prime}_1,x^{\prime}_2)$,$x_1=(x_1,x_2,\dots,x_r)^{\prime}$,
+		
+		$x_2=(x_{r+1},x_{r+2},\dots,x_p)^{\prime}$
+		
+		$H_0:\text{各组的 }E(x_2|x_1)\text{相等,}H_1:\text{各组的 }E(x_2|x_1)\text{不全相等}$
+		，是一个在$x_1$已选的条件下判断$x_2$对区分各组有无（附加的）显著作用的检验
+		
+		分块：
+		\[
+		E = \begin{pmatrix}
+			E_{11} & E_{12} \\
+			E_{21} & E_{22}
+		\end{pmatrix}
+		\begin{array}{c}
+			r \\
+			p - r
+		\end{array}, \quad
+		H = \begin{pmatrix}
+			H_{11} & H_{12} \\
+			H_{21} & H_{22}
+		\end{pmatrix}
+		\begin{array}{c}
+			r \\
+			p - r
+		\end{array}
+		\]
+		
+		$$\Lambda\left(x_{2}\mid x_{1}\right)=\frac{\Lambda\left(x_{1},x_{2}\right)}{\Lambda\left(x_{1}\right)}$$
+		
+		$$\Lambda\left(x_{1},x_{2}\right)=\frac{\left|E\right|}{\left|E+H\right|},\quad\Lambda\left(x_{1}\right)=\frac{\left|E_{11}\right|}{\left|E_{11}+H_{11}\right|}$$
+		
+		$$\Lambda=\Lambda\left(x_{p}\mid x_{1},x_{2},\cdots,x_{p-1}\right)=\frac{\Lambda\left(x_{1},x_{2},\cdots,x_{p}\right)}{\Lambda\left(x_{1},x_{2},\cdots,x_{p-1}\right)}$$
+		
+		$$F=F\left(x_{p}\mid x_{1},x_{2},\cdots,x_{p-1}\right)=\frac{1-\Lambda }{\Lambda}\frac{n-k-p+1}{k-1}$$
+		
+		拒绝规则：
+		
+		$\text{若 }F\geqslant F_a\left(k-1,n-k-p+1\right),\text{则拒绝 }H_0$
+		
+		\textbf{二、变量选择的方法}
+		
+		1.前进法：每次加入一个，然后用上面的判别一下，看要不要加入。
+		
+		2.后退法：先加入全部，然后用上面的公式判别一下，看把哪个提出。
+		
+		3.逐步判别法：结合了前进法和后退法。计算其一元方差分析的$F$统计量$F(x_i)$。最先开始选择$F(x_1)=max_iF(x_i)$。
+		
+		% 六、聚类
+		\section*{\centering \normalsize 6. 聚类}
+		\textbf{距离三条件}
+		$\text{(i)非负性:}d(x,y)\geqslant0$，
+		$\text{(ii)对称性:}d(x,y)=d(y,x);$，
+		$\text{(iii)三角不等式:}d(x,y)\leqslant d(x,z)+d(z,y)$，
+		
+		\textbf{明科夫斯基}：根据$q$的不同叫不同距离——绝对值、欧式。。。
+		
+		$d\left(x,y\right)=\left[\sum_{i=1}^{p}\left|x_{i}-y_{i}\right|^{q}\right]^{1/q}$
+		
+		\textbf{相似距离}
+		满足距离三个条件的定义：
+		$d_{ij}=\sqrt{2(1-c_{ij})}$
+		
+		\textbf{系统聚类法}
+		
+		\textbf{类平均}（不是用的平方距离不用二次方），画谱系图要开根号
+		
+		$D_{KL}=\frac{1}{n_Kn_L}\sum_{i \in G_K, j \in G_L}d_{ij}^2$
+		
+		递推公式：
+		$$D_{MJ}^{2}=\frac{n_{K}}{n_{M}}D_{KJ}^{2}+\frac{n_{L}}{n_{M}}D_{LJ}^{2}$$
+		
+		\textbf{重心法}，画谱系图要开根号
+		
+		初始化：
+		$$D_{KL}^{2}=d_{x_{K}\bar{x}_{L}}^{2}=\left(\overline{x}_{K}-\overline{x}_{L}\right)^{\prime}\left(\overline{x}_{K}-\overline{x}_{L}\right)$$
+		
+		新类的中心：
+		$$\overline{x}_M=\frac{n_K\overline{x}_K+n_L\overline{x}_L}{n_M}$$
+		
+		递推公式：
+		$$D_{MJ}^{2}=\frac{n_{K}}{n_{M}}D_{KJ}^{2}+\frac{n_{L}}{n_{M}}D_{LJ}^{2}-\frac{n_{K}n_{L}}{n_{M}^{2}}D_{KL}^{2}$$
+		
+		\textbf{离差平方和方法Ward}，画谱系图要开根号
+		
+		$\begin{gathered}W_{K}=\sum_{i\in G_{K}}\left(x_{i}-\overline{x}_{K}\right)^{\prime}\left(x_{i}-\overline{x}_{K}\right)\\W_{L}=\sum_{i\in G_{L}}\left(x_{i}-\overline{x}_{L}\right)^{\prime}\left(x_{i}-\overline{x}_{L}\right)\\W_{M}=\sum_{i\in G_{M}}\left(x_{i}-\overline{x}_{M}\right)^{\prime}\left(x_{i}-\overline{x}_{M}\right)\end{gathered}$
+		
+		$D^2_{KL}=W_M-W_K-W_L$
+		
+		其中$n_M=n_K+n_L$
+		
+		也可以表达为：
+		$$D^2_{KL}=\frac{n_Kn_L}{n_M}(\bar{x_K}-\bar{x_L})^{'}(\bar{x_K}-\bar{x_L})$$
+		
+		递推公式：
+		$$D_{MJ}^{2}=\frac{n_{J}+n_{K}}{n_{J}+n_{M}}D_{KJ}^{2}+\frac{n_{J}+n_{L}}{n_{J}+n_{M}}D_{LJ}^{2}-\frac{n_{J}}{n_{J}+n_{M}}D_{KL}^{2}$$
+		
+		\textbf{动态聚类}
+		
+		\textbf{K-means}
+		
+		1. 选择k个样本作为初始聚类点，或是将全部样本分为k个聚类
+		2. 对所有样本逐个归类
+		3. 计算聚类中心
+		4. 重复过程直到收敛
+		
+		% 七、MANOVA
+		\section*{\centering \normalsize 7. PCA}
+		
+		思想：
+		
+		$\begin{aligned}&\parallel a_1\parallel=1,\text{在约束条件下求向量 }a_1,\text{使得 }V(y_1)=a_1^{\prime}\boldsymbol{\Sigma}a_1\text{ 最大},\\&y_1\text{ 就称为第一主成分。}\end{aligned}$
+		
+		后面的主成分还要加上$Cov(y_k,y_i)=0$的约束，也就是不相关
+		
+		基本步骤（机器学习）：
+		
+		1.谱分解（协方差矩阵or相关矩阵）->2.从大到小排特征值->3.特征向量投影
+		
+		\textbf{1. 从协方差矩阵出发}
+		
+		\textbf{2. 从相关矩阵出发：}最后的判别函数的x要标准化
+		
+		\textbf{二、主成分的性质}
+		
+		1. 主成分向量的协方差矩阵
+		
+		$V(y)=\Lambda$
+		
+		即$V(y_i)=\lambda_i$
+		
+		2. 主成分的总方差
+		$\sum_{i=1}^p\lambda_i=\sum_{i=1}^p\sigma_{ii}$
+		
+		3. 原始变量$x_i$与主成分$y_k$之间的相关系数
+		$$\rho(x_{i},y_{k})=\frac{\mathrm{Cov}(x_{i},y_{k})}{\sqrt{V(x_{i})}\sqrt{V(y_{k})}}=\frac{\sqrt{\lambda_{k}}}{\sqrt{\sigma_{ii}}}t_{ik},\quad i,k=1,2,\cdotp\cdotp\cdotp,p$$
+		
+		4. $m$个主成分对原始变量的贡献率
+		$$\rho_{i+1,\cdots,m}^2=\sum_{k=1}^m\rho^2\left(x_i,y_k\right)=\sum_{k=1}^m\frac{\lambda_kt_k^2}{\sigma_{ii}}$$
+		
+		% 八、假设检验
+		\section*{\centering \normalsize 8. 因子分析}
+		
+		\textbf{一、正交因子模型}
+		
+		$\begin{cases}x_1=\mu_1+a_{11}f_1+a_{12}f_2+\cdots+a_{1m}f_m+\varepsilon_1\\x_2=\mu_2+a_{21}f_1+a_{22}f_2+\cdots+a_{2m}f_m+\varepsilon_2\\x_p=\mu_p+a_{p1}f_1+a_{p2}f_2+\cdots+a_{pm}f_m+\varepsilon_p&\end{cases}$
+		
+		$\begin{aligned}&E\left(f\right)=0\\&E\left(\boldsymbol{\varepsilon}\right)=\boldsymbol{0}\\&V\left(f\right)=\boldsymbol{I}\\&V\left(\boldsymbol{\varepsilon}\right)=\boldsymbol{D}=diag\left(\sigma_{1}^{2},\sigma_{2}^{2},\cdots,\sigma_{p}^{2}\right)\\&Cov\left(f,\boldsymbol{\varepsilon}\right)=E\left(f\boldsymbol{\varepsilon}^{\prime}\right)=\boldsymbol{0}\end{aligned}$
+		
+		\textbf{性质}
+		
+		\textbf{1. x的协方差矩阵分解}
+		$\boldsymbol{\Sigma}=V\left(Af+\boldsymbol{\varepsilon}\right)=V\left(Af\right)+V\left(\boldsymbol{\varepsilon}\right)=AV\left(f\right)A^{\prime}+V\left(\boldsymbol{\varepsilon}\right)=AA^{\prime}+\boldsymbol{D}$
+		
+		\textbf{2. 模型不受单位影响}
+		
+		\textbf{3. 因子载荷是不唯一的}
+		
+		\textbf{三、因子载荷的统计意义}
+		
+		\textbf{1. A的元素}
+		
+		$Cov(x_i,f_j)=a_{ij}$
+		
+		$$\rho\left(x_{i},f_{j}\right)=\frac{Cov\left(x_{i},f_{j}\right)}{\sqrt{V\left(x_{i}\right)V\left(f_{j}\right)}}=Cov\left(x_{i},f_{j}\right)=a_{ij}$$
+		\textbf{2. A的行元素平方和}
+		$$h_{i}^{2}=\sum_{j=1}^{m}a_{ij}^{2},\quad i=1,2,\cdots,p$$
+		
+		有$\sigma_{ii}=h_{i}^{2}+\sigma_{i}^{2},\quad i=1,2,\cdots,p$
+		
+		\textbf{3. A的列元素平方和}，要算单个因子的贡献率要用到这个$g_j^2$，用它去除p或是没有标准化（x的方差总和）
+		
+		$g_{j}^{2}=\sum_{i=1}^{p}a_{ij}^{2},\quad i=1,2,\cdots,p$
+		
+		\textbf{4. A的元素平方和}，求选择的因子的总贡献率
+		
+		$$\sum_{j=1}^{m}g_{j}^{2}/\sum_{i=1}^{p}V(x_{i})\left[=\sum_{i=1}^{p}h_{i}^{2}/\sum_{i=1}^{p}V(x_{i})\right]$$
+		
+		标准化之后：
+		$$\sum_{j=1}^{m}g_{j}^{2}/p\left[=\sum_{i=1}^{p}h_{i}^{2} / p\right]$$
+		
+		\textbf{8.3 参数估计}
+		
+		残差矩阵：
+		$S-\left(\hat{A}\hat{A}^{\prime}+\hat{D}\right)$
+		
+		$S-(\hat{A}\hat{A}^{\prime}+\hat{D})\text{的元素平方和}\leqslant\hat{\lambda}_{m+1}^2+\cdotp\cdotp\cdotp+\hat{\lambda}_p^2$
+		
+		其中：$D = diag(S-AA^{\prime})$，是对角矩阵
+		
+		\textbf{① 主成分法}
+		步骤：1.计算协方差矩阵S，或者是R，2.特征值分解（谱分解），3.选择因子数（贡献率），
+		
+		4.计算因子载荷
+		$A=V_{:m\text{特征向量前m列}}\sqrt{\Lambda_{:m\text{特征值前m个(从大到小)}}}$
+		
+		\textbf{② 主因子法}
+		
+		1. 计算相关矩阵R，
+		
+		2.估计特殊方差（一个对角矩阵），
+		
+		3.约相关矩阵$R_{star}=R-D$其中D是特殊方差对角矩阵，
+		
+		4. 特征值分解，
+		
+		5.选择前m个特征值
+		
+		$\mathbf{\Lambda}^{*}=\mathrm{diag}(\sqrt{\lambda_{1}},\sqrt{\lambda_{2}},\ldots,\sqrt{\lambda_{m}}),\mathbf{T}^{*}=\mathbf{V}_{:m}$ 
+		
+		6. 计算因子载荷矩阵$\mathbf{A}=\mathbf{T}^*\mathbf{\Lambda}^*$
+		
+		特殊方差估计：
+		
+		1. R满秩：$\hat{\sigma}_{i}^{2}=1/r^{ii}$
+		
+		2. R不满秩：（1）$\text{取 }\hat{h}_i^2=\max_{j\neq i}|r_{ij}|,\text{此时 }\hat{\sigma}_i^2=1-\hat{h}_i^2$。
+		（2）$\text{取 }\hat{h}_i^2=1,\text{此时 }\hat{\sigma}_i^2=0,\text{得到的 }\hat{A}\text{ 是一个主成分解。}$
+		
+		\textbf{③ 极大似然法}
+		
+		1. 随机初始化A,$D = diag(R-AA^{\prime})$，A是p*m，p是变量数
+		
+		2. 更新公式：$A_{\mathrm{new}}=RD^{-1}A(I_m+A^TD^{-1}A)^{-1}$
+		
+		3. 更新公式：$D_{\mathrm{new}}=\mathrm{diag}(R-A_{\mathrm{new}}A_{\mathrm{new}}^T)$
+		
+		4. 迭代至收敛
+		
+		\textbf{四、因子旋转}
+		$$d_{ij}=\frac{a_{ij}^*}{h_i},\quad\overline{d}_j=\frac{1}{p}\sum_{i=1}^pd_{ij}^2$$
+		
+		$$V_j=\frac{1}{p}\sum_{i=1}^{p}(d_{ij}^{2}-\overline{d}_{j})^{2}$$
+		
+		使得这个式子$V$最大：
+		$V=V_1+V_2+\dots +V_m$
+		
+		步骤：
+		
+		1. 更新旋转公式：$U,S,V^T=\mathrm{SVD}(A^T(D^3-D\cdot\mathrm{diag}(\mathrm{mean}(D^2,\mathrm{axis}=0))))$
+		
+		2. $T=UV^T$
+		
+		3. A=AT
+		
+		4. 迭代直到收敛
+		
+		\textbf{五、因子得分}
+		
+		\textbf{二、回归法}
+		
+		$\hat{f}_{j}=\hat{A}^{\prime}S^{-1}\left(x_{j}-\overline{x}\right)$
+		
+		% 八、对应分析
+		\section*{\centering \normalsize 9. 对应分析}
+		
+		行密度$r=P1=(p_1.,p_2.,\cdots,p_p.)^{\prime}$
+		
+		列密度$c^{\prime}=1^{\prime}P=(p._1,p._2,\cdots,p._q)$
+		
+		性质：$r_i^{\prime}1=1, 1^{\prime}c_j=1$
+		
+		行轮廓和列轮廓矩阵：求法1.行（列）加在一起2.每个按比例除（分行列）
+		
+		$R=D^{-1}_rP = \left(\begin{array}{cccc}
+			\frac{p_{11}}{p_{1}} & \frac{p_{12}}{p_{1} \cdot} & \cdots & \frac{p_{1 q}}{p_{1}} \\
+			\frac{p_{21}}{p_{2}} \cdot & \frac{p_{22}}{p_{2}} & \cdots & \frac{p_{2 q}}{p_{2}} \\
+			\vdots & \vdots & & \vdots \\
+			\frac{p_{p 1}}{p_{p}} & \frac{p_{p 2}}{p_{p}} & \cdots & \frac{p_{p q}}{p_{p} .}
+		\end{array}\right)$
+		$$C=PD^{-1}_c$$
+		
+		其中：$D_r=diag(p_{1·},p_{2·},p_{p·})$，$D_c=diag(p_{·1},p_{·2},p_{·q})$
+		
+		性质：
+		
+		$$r=P1=(PD_c^{-1})(D_c1)=(c_1,c_2,\cdots,c_q)\begin{bmatrix}p\cdot_1\\p\cdot_2\\\vdots\\p\cdot_q\end{bmatrix}=\sum_{j=1}^qp._jc_j$$
+		
+		$c^{\prime}=1^{\prime}P=(1^{\prime}D_{r})(D_{r}^{-1}P)=\sum_{i=1}^{p}p_{i}.r_{i}^{\prime}$
+		
+		解题步骤：1.求出$r_m$和$c_m$（边缘频率）和$P$，2.求出期望值矩阵$E=r_m*c_m^T$，3.标准化残差矩阵$S=\frac{P-E}{\sqrt{E}}$，4.奇异值分解，5.主惯量为奇异值的二乘法，6.贡献率=$\frac{\text{主惯量向量}}{\text{主惯量向量求和}}$
+		
+		\textbf{9.3 独立性（行列）检验和总惯量}
+		
+		检验：
+		$$\chi^{2}=n\sum_{i=1}^{p}\sum_{j=1}^{q}\frac{(p_{ij}-p_{i}.p._{j})^{2}}{p_{i}.p._{j}}$$
+		
+		拒绝规则：
+		
+		$\text{若}\chi^{2}\geqslant\chi_{a}^{2}\left[\left(p-1\right)\left(q-1\right)\right]\text{,则拒绝独立性的原假设}$
+		
+		总惯量：
+		$$\text{总惯量}=\frac{\chi^2}{n}=\sum_{i=1}^p\sum_{j=1}^q\frac{(p_{ij}-p_i.p._j)^2}{p_i.p._j}$$
+		
+		$\text{总惯量}=\sum_{i=1}^pp_i.\sum_{j=1}^q\frac{(p_{ij}/p_i.-p_{ij})^2}{p._j}=\sum_{i=1}^pp_i.(r_i-c)^{\prime}D_c^{-1}(r_i-c)$
+		
+		$\text{总惯量}=\sum_{j=1}^qp._j\sum_{i=1}^p\frac{(p_{ij}/p._j-p_{ii})^2}{p_i.}=\sum_{j=1}^qp._j(c_j-r)^{\prime}D_r^{-1}(c_j-r)$
+		
+		\textbf{总惯量为0的情况等价}
+		
+		1. 所有行（列）轮廓相等
+		
+		2. $p_{ij}=p_{i·}p_{·j}$，$P=rc^{'}$
+		
+		\textbf{总惯量分解}
+		
+		$\mathbf{Z}=\mathbf{D}_r^{-1/2}(\mathbf{P}-rc^{\prime})\mathbf{D}_c^{-1/2}$
+		
+		$$\begin{aligned}\text{总惯量}&=\sum_{i=1}^p\sum_{j=1}^q\frac{(p_{ij}-p_i.p._j)^2}{p_i.p._j}=\sum_{i=1}^p\sum_{j=1}^qz_{ij}^2\\&=\mathrm{tr}(\mathbf{Z}^{\prime})=\sum_{i=1}^{k}\lambda_{i}^{2}\end{aligned}$$
+		
+		\textbf{行、列轮廓坐标}
+		
+		1. 计算频率表P。2.行和列的边际频率。3.标准化残差$\mathbf{S}_{ij}=\frac{\mathbf{P}_{ij}-\mathbf{p}_i\mathbf{p}_j}{\sqrt{\mathbf{p}_i\mathbf{p}_j}}$。4.$\mathbf{S}_{ij}=\mathbf{U}\mathbf{\Sigma}\mathbf{V}^T$。5.$\mathbf{D}_r=\mathrm{diag}(\sqrt{\mathbf{p}_i}),\quad\mathbf{D}_c=\mathrm{diag}(\sqrt{\mathbf{p}_j})$。6.计算轮廓坐标$\mathbf{F}=\mathbf{D}_{r}^{-1}\mathbf{U}\mathbf{\Sigma}\mathbf,{G}=\mathbf{D}_{c}^{-1}\mathbf{V}^{T}\mathbf{\Sigma}$。
+		
+		\textbf{对应分析图}
+		
+		% 八、典型相关
+		\section*{\centering \normalsize 10. 典型相关}
+		
+		思想：
+		在$\boldsymbol{a}^{\prime} \boldsymbol{\Sigma}_{11} \boldsymbol{a}=1, \quad \boldsymbol{b}^{\prime} \boldsymbol{\Sigma}_{22} \boldsymbol{b}=1$条件下，使得$\rho(u,v)=a^{'}\Sigma_{12}b$最大
+		
+		$\mathrm{rank}(\boldsymbol{\Sigma}_{22}^{-1/2}\boldsymbol{\Sigma}_{21}\boldsymbol{\Sigma}_{11}^{-1}\boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1/2})=\mathrm{rank}(\boldsymbol{\Sigma}_{11}^{-1/2}\boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1/2})=\mathrm{rank}(\boldsymbol{\Sigma}_{12})=m$
+		
+		由$\S1.6$ 一的性质(2)知 $,\Sigma_{11}^{-1}\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21},\Sigma_{22}^{-1}\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12},\Sigma_{11}^{-1/2}\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}\Sigma_{11}^{-1/2}(\geqslant0)$和$\Sigma_{22}^{-1/2}$ $\boldsymbol{\Sigma}_{21}\boldsymbol{\Sigma}_{11}^{-1}\boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1/2}(\boldsymbol{\geqslant}0)$都有着相同的非零特征值，可记为$\rho_1^2\geq\rho_2^2\geqslant\cdots\geqslant\rho_m^2>0$
+		
+		$\alpha_{i}=\frac{1}{\rho_{i}}\boldsymbol{\Sigma}_{11}^{-1/2}\boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1/2}\boldsymbol{\beta}_{i},\quad\boldsymbol{a}_{i}=\boldsymbol{\Sigma}_{11}^{-1/2}\boldsymbol{\alpha}_{i},\quad\boldsymbol{b}_{i}=\boldsymbol{\Sigma}_{22}^{-1/2}\boldsymbol{\beta}_{i}$
+		
+		解题步骤：1.做SVD分解A：
+		
+		$A=\Sigma_{11}^{-\frac{1}{2}}\Sigma_{12}\Sigma_{22}^{-\frac{1}{2}}$
+		
+		SVD结果：
+		
+		$A=UsV^T$
+		
+		其中s是典型相关系数
+		
+		2.计算典型变量向量：
+		
+		$\text{canonicalVariateX} = \Sigma_{11}^{-\frac{1}{2}}U$
+		
+		$\text{canonicalVariateY} = \Sigma_{22}^{-\frac{1}{2}}V^T$
+		
+		3.典型变量与原始变量相关系数：
+		
+		$\text{corrXU} = R_{11} \text{canonicalVariateX}$
+		
+		$\text{corrYV} = R_{22} \text{canonicalVariateY}$
+		
+		\textbf{性质}
+		
+		1. 同一组的典型变量互不相关
+		
+		2. 不同组的典型变量之间的相关性
+		
+		$\rho(u_{i},v_{i})=\rho_{i},\quad i=1,2,\cdots,m$
+		
+		$\rho(u_{i},v_{j})=0,\quad1\leqslant i\neq j\leqslant m$
+		
+		$V\binom{u}{v}=\binom{I \Lambda}{\Lambda I}$
+		
+		其中：$\Lambda = diag(\rho_1,\rho_2,\dots,\rho_m)$
+		
+		3. 原始变量与典型变量之间的相关系数
+		
+		$\rho(x,u)=D_1^{-1}\boldsymbol{\Sigma}_{11}\boldsymbol{A},\quad\rho(x,v)=D_1^{-1}\boldsymbol{\Sigma}_{12}\boldsymbol{B}$
+		
+		$\rho(y,u)=D_2^{-1}\boldsymbol{\Sigma}_{21}\boldsymbol{A},\quad\rho(y,v)=D_2^{-1}\boldsymbol{\Sigma}_{22}\boldsymbol{B}$
+		
+		$\text{其中}\mathbf{D}_1=\mathrm{diag}(\sqrt{V(x_1)},\cdotp\cdotp\cdotp,\sqrt{V(x_p)}),\mathbf{D}_2=\mathrm{diag}(\sqrt{V(y_1)},\cdotp\cdotp\cdotp,\sqrt{V(y_q)})。$
+		
+		4. 典型相关也是某种复相关系数
+		
+		$\rho_{u_i \cdot y}=\rho_i$
+		
+		$\rho_{v_i \cdot x}=\rho_i$
+		
+		5. 简单相关、复相关和典型相关之间的关系：复相关是典型相关的一个特例，简单相关是复相关的一个特例
+		
+		\textbf{显著性检验}
+		
+		思想：每次检验完一个（如$\rho_1$）不等于0，如果拒绝$H_0$，那么就把那个检验用的丢掉，再次检验($\rho_2 \neq 0$)。
+		
+		问题：
+		
+		$H_0:\rho_{k+1}=\cdots=\rho_m=0,\quad H_1:\rho_{k+1},\cdotp\cdotp\cdotp,\rho_m\text{ 至少有一个不为零}$
+		
+		统计量：
+		
+		$\Lambda_{k+1}=\prod_{i=k+1}^m(1-r_i^2)$
+		
+		$Q_{k+1}=-\left[n-k-\frac{1}{2}(p+q+3)+\sum_{i=1}^kr_i^{-2}\right]\mathrm{ln}\Lambda_{k+1}$
+		
+		拒绝规则：
+		
+		$\text{给定}\alpha \text{,若}Q_{k+1}\geqslant\chi_{\alpha}^{2}\left[\left(p-k\right)\left(q-k\right)\right]
+		\text{,则拒绝原假设}H_0$
+		
+	\end{multicols*}
+\end{document}
