@@ -1,2 +1,11 @@
-# learning-materials
-学习资料
+# 重庆大学数据科学与大数据专业学习资料库
+
+## 目录结构
+- **机器学习**：包含机器学习课程的学习笔记、实验代码和参考资料。
+- **数据挖掘**：数据挖掘课程的相关资料和项目。
+- **统计分析**：统计分析课程的学习资料和案例。
+
+## 如何使用
+1. 克隆本仓库到本地：
+   ```bash
+   git clone https://github.com/codeofwhite/learning-materials.git
